@@ -10,7 +10,7 @@ def solution():
     for _ in range(n-1):
         new_dp = dp[:]
         for i in range(10):
-            new_dp[i] = sum(map(lambda x : x%10007,dp[:i+1]))
+            new_dp[i] = sum(dp[:i+1])
         dp = new_dp
 
     print(sum(dp)%10007)
