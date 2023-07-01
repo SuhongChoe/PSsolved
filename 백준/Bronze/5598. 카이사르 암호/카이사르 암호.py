@@ -11,7 +11,7 @@ def function():
 
     caesar = input().strip()
 
-    return ''.join(map(lambda x : chr(ord(x)-3) if ord(x)-3>=ord('A') else chr(ord('Z')-(ord('A')-ord(x)+2)), caesar))
+    return ''.join(map(lambda x : chr(ord('A')+(ord(x)-ord('A')-3)%26), caesar))
     
 if __name__ == "__main__":
     print(function())
