@@ -11,17 +11,14 @@ def function():
     # solution
     # defaultdict 자료구조를 활용한다면 len(S)만큼 실행됨
 
-    from collections import defaultdict
+    # 알파벳을 ord와 chr을 이용한다면 abcdefghijklmnopqrstuvwxyz 이렇게 쓰는것보다
+    # for i in range(ord(a), ord(z)+1): 이렇게 써서 chr(i)를 활용하는 것이 나음
 
-    dic = defaultdict(int)
+    # 단어의 길이가 100이므로 find를 써도 무방함, 없으면 -1을 출력하기에
 
     S = input().strip()
 
-    for i, c in enumerate(S):
-        if dic[c]==0:
-            dic[c] = i + 1 # 시작위치와 추후 알파벳을 출력할때 의 값이 같음을 방지하기 위함
-
-    return ' '.join(map(str, [dic[c]-1 if dic[c]!=0 else -1 for c in 'abcdefghijklmnopqrstuvwxyz']))
+    return ' '.join(map(str, [S.find(chr(i)) for i in range(ord('a'), ord('z')+1)]))
     
 if __name__ == "__main__":
     print(str(function()))
