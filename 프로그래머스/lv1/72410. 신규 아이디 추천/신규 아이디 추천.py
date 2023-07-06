@@ -14,22 +14,21 @@ def solution(new_id):
     # 6. 길이가 16이상이라면 첫 15개를 제외한 문제 제거 (단, 이후 발생한 .가 있다면 추가 제거)
     # 7. 길이가 2자 이하면 마지막 문자를 길이가 3이 될때까지 반복해서 복사
     
-    import re
-    
     new_id = new_id.lower() # 1번
     
-    new_id = re.sub(r'[^a-z0-9-_.]', '', new_id) # 2번
+    import re
+    new_id = re.sub(r'[^a-z0-9_.-]', '', new_id) # 2번
     
     new_id = re.sub(r'\.{2,}', '.', new_id) # 3번
-
-    new_id = re.sub(r'\.$', '', new_id)
-    new_id = re.sub(r'^\.', '', new_id) # 4번
     
-    new_id = re.sub(r'^$', 'a', new_id) # 5번
+    if new_id and new_id[0]=='.': new_id = new_id[1:]
+    if new_id and new_id[-1]=='.': new_id = new_id[:-1] # 4번
     
-    new_id = new_id[:15] if len(new_id)>=16 else new_id # 6번
-    new_id = re.sub(r'\.$', '', new_id)
+    if not new_id: new_id = 'a' # 5번
     
-    while len(new_id)<=2: new_id += new_id[-1] # 7번
+    if len(new_id)>15: new_id = new_id[:15] # 6번
+    if new_id and new_id[-1]=='.': new_id = new_id[:-1]
+    
+    while len(new_id)<3: new_id += new_id[-1] # 7번
     
     return new_id
