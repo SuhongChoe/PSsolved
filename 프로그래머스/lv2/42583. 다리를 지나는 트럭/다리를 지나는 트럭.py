@@ -24,8 +24,9 @@ def solution(bridge_length, weight, truck_weights):
     while truck_weights:
         bridge_weights -= crossing_trucks.pop()
         if bridge_weights + truck_weights[-1] <= weight: # 트럭 보낼 수 있는 경우
-            bridge_weights += truck_weights[-1]
-            crossing_trucks.appendleft(truck_weights.pop())
+            truck = truck_weights.pop()
+            bridge_weights += truck
+            crossing_trucks.appendleft(truck)
         else: # 트럭 내보낼 수 없는 경우
             crossing_trucks.appendleft(0) # shift 처리
         time += 1
