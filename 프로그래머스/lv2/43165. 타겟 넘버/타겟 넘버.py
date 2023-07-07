@@ -1,11 +1,11 @@
-def dfs(numbers, s, target, res):
-    if not numbers:
-        if s == target:
-            res[0] += 1
-    else:
-        n = numbers[0]
-        dfs(numbers[1:], s - n, target, res)
-        dfs(numbers[1:], s + n, target, res)
+# def dfs(numbers, s, target, res):
+#     if not numbers:
+#         if s == target:
+#             res[0] += 1
+#     else:
+#         n = numbers[0]
+#         dfs(numbers[1:], s - n, target, res)
+#         dfs(numbers[1:], s + n, target, res)
         
 
 def solution(numbers, target):
@@ -17,8 +17,14 @@ def solution(numbers, target):
     # 각숫자가 + - 일 모든 경우를 적절히 섞어 완전탐색으로 푼다면 2**20 약 100만
     # 시간복잡도 괜찮음
     
-    res = [0]
+#     res = [0]
     
-    dfs(numbers, 0, target, res)
+#     dfs(numbers, 0, target, res)
     
-    return res[0]
+#     return res[0]
+    if not numbers and target == 0:
+        return 1
+    elif not numbers:
+        return 0
+    else:
+        return solution(numbers[1:], target + numbers[0]) + solution(numbers[1:], target - numbers[0])
