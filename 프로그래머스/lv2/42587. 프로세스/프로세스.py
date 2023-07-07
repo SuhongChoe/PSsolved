@@ -11,13 +11,14 @@ def solution(priorities, location):
 
     priorities = deque(priorities)
     locations = deque(range(len(priorities)))
+    sort_priorites = sorted(priorities)
     
     res = 0
     
     while priorities:
         res += 1
         
-        cnt_rotate = priorities.index(max(priorities))
+        cnt_rotate = priorities.index(sort_priorites.pop())
         priorities.rotate(-cnt_rotate)
         locations.rotate(-cnt_rotate)
         
