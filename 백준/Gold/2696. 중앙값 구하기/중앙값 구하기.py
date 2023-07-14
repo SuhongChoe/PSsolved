@@ -1,6 +1,6 @@
 from sys import stdin, stdout
 input=stdin.readline
-# print=stdout.write
+print=stdout.write
 
 def function():
     # write down code
@@ -63,12 +63,8 @@ def function():
             if i%10 == 0:
                 mini_res += '\n'
             mini_res += str(t[i]) + ' '
-            # res.append(' '.join(map(str, t[:10])))
-            # t = t[10:]
 
         res.append(mini_res.strip())
-
-        # if t: res.append('\n'.join(map(str, t[:10])))
 
     return '\n'.join(res)
     
