@@ -1,18 +1,20 @@
 def solution(prices):
-    # 문제의 핵심은 가격과 위치정보가 필요하다는 것과
-    # prices의 길이가 100000이라는 것
-    # 따라서 스택을 활용한 이전가격과 비교하여 얼만큼의 추세길이를 가지고있는지 확인하는 방법이 중요
+    # 현재 보는 가격보다 이전가격이 큰 경우 그때 초기화됨
+    # stack에 저장하면서 위치 정보와 같이 저장함
     
-    res = [0]*len(prices)
-    len_prices = len(prices)
     s = []
+    n = len(prices)
+    res = [0]*n
     
     for i, p in enumerate(prices):
-        while s and s[-1][1] > prices[i]:
-            past, _ = s.pop()
-            res[past] = i - past
-        s.append((i, p))
-    for i, p in s:
-        res[i] = len_prices - i - 1
+        idx = (n-i)-1
+        while s and s[-1][0] > p:
+            before_price, before_idx = s.pop()
+            res[n-before_idx-1] = before_idx-idx
+        s.append((p, idx))
     
+    while s:
+        price, idx = s.pop()
+        res[n-idx-1] = idx
+        
     return res
