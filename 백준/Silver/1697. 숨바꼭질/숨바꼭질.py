@@ -2,7 +2,7 @@ from sys import stdin, stdout
 input=stdin.readline
 print=stdout.write
 
-def function():
+def old_function():
     # write down code
     # 일직선 상에서 수빈이와 동생이 위치함
     # 수빈 -> n
@@ -47,15 +47,51 @@ def function():
         if new_n == k:
             return cnt
 
-        if 0 <= new_n - 1 <= 100000 and not visited[new_n - 1]:
-            q.append((new_n - 1, cnt + 1))
-            visited[new_n - 1] = True
-        if 0 <= new_n + 1 <= 100000 and not visited[new_n + 1]:
-            q.append((new_n + 1, cnt + 1))
-            visited[new_n + 1] = True
-        if 0 <= new_n * 2 <= 100000 and not visited[new_n * 2]:
-            q.append((new_n * 2, cnt + 1))
-            visited[new_n * 2] = True
+        # 아래의 코드를 깔끔하게 바꿀 수 있다.
+        # if 0 <= new_n - 1 <= 100000 and not visited[new_n - 1]:
+        #     q.append((new_n - 1, cnt + 1))
+        #     visited[new_n - 1] = True
+        # if 0 <= new_n + 1 <= 100000 and not visited[new_n + 1]:
+        #     q.append((new_n + 1, cnt + 1))
+        #     visited[new_n + 1] = True
+        # if 0 <= new_n * 2 <= 100000 and not visited[new_n * 2]:
+        #     q.append((new_n * 2, cnt + 1))
+        #     visited[new_n * 2] = True
+
+        # 이렇게 말이다
+        for next_n in (new_n - 1, new_n + 1, new_n * 2):
+            if 0 <= next_n <= 100000 and not visited[next_n]:
+                q.append((next_n, cnt + 1))
+                visited[next_n] = True
+
+
+def function():
+    # 수빈이의 위치 N
+    # 동생 K
+    # 수빈이 보법
+    # 1. X + 1
+    # 2. X - 1
+    # 3. 2*X
+    # return N -> K 최소시간
+
+    from collections import deque
+    import sys
+
+    n, k = map(int, input().split())
+
+    d = [sys.maxsize]*100001
+    d[n] = 0
+    q = deque([n])
+
+    while q:
+        x = q.popleft()
+
+        for next_x in [x-1, x+1, x*2]:
+            if 0 <= next_x <= 100000 and d[x]+1<d[next_x]:
+                d[next_x] = d[x]+1
+                q.append(next_x)
+
+    return d[k]
 
 if __name__ == "__main__":
     print(str(function()))
