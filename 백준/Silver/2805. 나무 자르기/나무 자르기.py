@@ -9,19 +9,25 @@ def function():
     # n 나무 개수, m 총합 길이
     # arr 나무들의 길이
 
+    # solution
+    # 개쩌는거 찾음
+    # 나무의 길이가 중복이 될 수 있기에 Counter로 이걸 더 빠르게 처리할 수 있음
+
+    from collections import Counter
+
     n, m = map(int, input().split())
-    arr = list(map(int, input().split()))
+    tree = Counter(map(int, input().split()))
 
     res = 0
 
-    l, r = 1, max(arr)
+    l, r = 1, 2000000000
     while l <= r:
         mid = (l+r)//2
 
         total_m = 0
-        for i in arr:
-            if i > mid:
-                total_m += i - mid
+        for h, i in tree.items():
+            if h > mid:
+                total_m += (h - mid) * i
 
         if total_m >= m: # 높이를 올려야함
             res = mid
