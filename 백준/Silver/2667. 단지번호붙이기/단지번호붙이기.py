@@ -1,41 +1,48 @@
-import sys
-from collections import deque
+from sys import stdin, stdout
+input=stdin.readline
+print=stdout.write
 
-def solution():
-    input = sys.stdin.readline
-    # 상, 하 , 좌, 우
-    dx = [0,0,-1,1]
-    dy = [-1,1,0,0]
+def function():
+    # write down code
+    # 1 집 0 빈집
+
+    res = []
 
     n = int(input())
-
-    Map = [list(map(int,input().strip())) for _ in range(n)]
-
-    check_map = [list(map(lambda x : True if x==1 else False,i)) for i in Map]
-
-    answers = []
-
-    def BFS(y, x):
-        q = deque()
-        q.append((y,x))
-        check_map[y][x]=False
-        answer = 1
-        while q:
-            y, x = q.popleft()
-            for i in range(4):
-                new_y = y+dy[i]
-                new_x = x+dx[i]
-                if 0<=new_y<n and 0<=new_x<n and check_map[new_y][new_x]:
-                    q.append((new_y,new_x))
-                    check_map[new_y][new_x]=False
-                    answer += 1
-        answers.append(answer)
+    graph = [list(input().strip()) for _ in range(n)]
 
     for i in range(n):
         for j in range(n):
-            if check_map[i][j]:
-                BFS(i,j)
-    print(len(answers))
-    for answer in sorted(answers): print(answer)
+            if graph[i][j] == '1':
+                res.append(bfs(graph, j, i))
 
-solution()
+    res.sort()
+    res = [len(res)] + res
+    return '\n'.join(map(str, res))
+
+def bfs(graph, start_x, start_y):
+    from collections import deque
+
+    dy = [1,-1,0,0]
+    dx = [0,0,-1,1]
+    n = len(graph)
+
+    graph[start_y][start_x] = '0'
+    q = deque([(start_x, start_y)])
+    cnt = 1
+
+    while q:
+        x, y = q.popleft()
+
+        for i in range(4):
+            next_x, next_y = x+dx[i], y+dy[i]
+            if 0 <= next_x < n and 0 <= next_y < n and graph[next_y][next_x] == '1':
+                graph[next_y][next_x] = '0'
+                q.append((next_x, next_y))
+                cnt+=1
+
+    return cnt
+
+    
+if __name__ == "__main__":
+    print(function())
