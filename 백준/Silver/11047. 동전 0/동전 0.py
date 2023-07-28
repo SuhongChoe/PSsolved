@@ -8,7 +8,6 @@ def function():
     n, k = map(int, input().split())
 
     coins = [int(input()) for _ in range(n)]
-    coins = [coin for coin in coins if coin <= k]
     coins.reverse()
 
     res = 0
