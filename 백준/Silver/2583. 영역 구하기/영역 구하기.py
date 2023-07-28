@@ -10,7 +10,6 @@ def function():
 
     m, n, k = map(int, input().split())
     iscolor = [[False] * n for _ in range(m)]
-    cnt = 0
     res = []
 
     for _ in range(k):
@@ -24,10 +23,9 @@ def function():
             if not iscolor[y][x]:
                 iscolor[y][x] = True
                 res.append(bfs(iscolor, x, y))
-                cnt += 1
 
     res.sort()
-    res = [str(cnt), ' '.join(map(str, res))]
+    res = [str(len(res)), ' '.join(map(str, res))]
 
     return '\n'.join(res)
 
