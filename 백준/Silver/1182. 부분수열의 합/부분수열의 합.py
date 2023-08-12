@@ -2,14 +2,13 @@ from sys import stdin, stdout
 input=stdin.readline
 print=stdout.write
 
-
-def dfs(arr, idx, s, res):
-    if len(arr) == idx:
+def dfs(arr, idx, s, res, n):
+    if n == idx:
         return
     if s-arr[idx] == 0:
         res[0] += 1
-    dfs(arr, idx+1, s-arr[idx], res)
-    dfs(arr, idx+1, s, res)
+    dfs(arr, idx+1, s-arr[idx], res, n)
+    dfs(arr, idx+1, s, res, n)
 
 def function():
     # write down code
@@ -17,7 +16,6 @@ def function():
     # 2. arr
 
     # solution
-    #
 
     res = [0]
 
@@ -25,9 +23,10 @@ def function():
     arr = list(map(int, input().split()))
     arr.sort()
 
-    dfs(arr, 0, s, res)
+    dfs(arr, 0, s, res, n)
 
-    return str(*res)
-    
+    return str(res[0])
+
+
 if __name__ == "__main__":
     print(function())
