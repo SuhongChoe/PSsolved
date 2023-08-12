@@ -1,30 +1,27 @@
-import sys
-input = sys.stdin.readline
-output = sys.stdout.write
+from sys import stdin, stdout
+input=stdin.readline
+print=stdout.write
 
 def function():
-    # write code down
-    
-    # input 형태
-    # 1. n 회의 수
-    # 2~. 회의가 시작하고 끝나느 시간 0 <= time <= 2^31-1
-    
-    # return : 최대 사용할 수 있는 회의의 최대 개수
+    # write down code
+    # 1. n : 회의의 수 1 <= n <= 100000
+    # 2~. start, end : 회의의 시작시간 끝나는 시간
 
     n = int(input())
-    arr = [list(map(int, input().split())) for _ in range(n)]
+    schedule = [list(map(int, input().split())) for _ in range(n)]
 
-    arr.sort(key=lambda x: (x[1], x[0]))
+    schedule.sort(key=lambda x: (x[1], -(x[1]-x[0])))
 
+    end = schedule[0][1]
     res = 1
-    end_time = arr[0][1]
-    for i in range(1, n):
-        start_time = arr[i][0]
-        if end_time <= start_time:
-            res+=1
-            end_time = arr[i][1]
-    
-    return str(res)
 
+    for i in range(1, n):
+        next_s, next_e = schedule[i]
+        if end <= next_s:
+            end = next_e
+            res += 1
+
+    return str(res)
+    
 if __name__ == "__main__":
     print(function())
