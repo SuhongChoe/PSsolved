@@ -44,7 +44,8 @@ def good_seq(seq):
     for i in range(1, mid+1):
         if seq[-i*2:-i] == seq[-i:]:
             return False
-    return True
+    else:
+        return True
 
 if __name__ == "__main__":
     print(function())
