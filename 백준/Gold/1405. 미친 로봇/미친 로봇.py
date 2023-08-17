@@ -23,23 +23,22 @@ def function():
     per = list(map(lambda x: x/100, per))
 
     res = [0]
-    dic = {i:0 for i in 'ewsn'}
     
-    backtracking(res, per, 0, [(0, 0)], n, 1)
+    backtracking(res, per, 0, {(0, 0)}, n, (0,0), 1)
 
     return res[0]
 
-def backtracking(res, per, cnt, visited, n, total):
+def backtracking(res, per, cnt, visited, n, point, total):
     if cnt==n:
         res[0]+=total
         return
-    x, y = visited[-1]
+    x, y = point
     for i in range(4):
         nx, ny = dx[i]+x, dy[i]+y
         if not (nx, ny) in visited:
-            visited.append((nx, ny))
-            backtracking(res, per, cnt+1, visited, n, total*per[i])
-            visited.pop()
+            visited.add((nx, ny))
+            backtracking(res, per, cnt+1, visited, n, (nx, ny), total*per[i])
+            visited.remove((nx, ny))
 
 if __name__ == "__main__":
     print(function())
