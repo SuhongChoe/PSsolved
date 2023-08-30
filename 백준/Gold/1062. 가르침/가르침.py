@@ -81,7 +81,9 @@ def function():
         return str(res[0])
 
 def backtracking(idx, learned, words, res, k):
+    # print(idx, learned, k)
     if k==0:
+        # print(str(learned))
         cnt = 0
         for word in words:
             if not word - learned:
@@ -91,6 +93,7 @@ def backtracking(idx, learned, words, res, k):
 
     for i in range(idx, 26):
         c = chr(97+i)
+        # print(c)
         if not c in learned:
             learned.add(c)
             backtracking(i+1, learned, words, res, k-1)
