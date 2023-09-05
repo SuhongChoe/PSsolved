@@ -2,15 +2,8 @@ from sys import stdin, stdout
 input=stdin.readline
 print=stdout.write
 
-# def dfs(arr, idx, s, res, n):
-#     if n == idx:
-#         return
-#     if s-arr[idx] == 0:
-#         res[0] += 1
-#     dfs(arr, idx+1, s-arr[idx], res, n)
-#     dfs(arr, idx+1, s, res, n)
-
 def function():
+    global n, res, arr
     # write code down
     # 수열 안의 원소들의 합으로 s를 만들 수 있는 경우의 수
 
@@ -25,23 +18,24 @@ def function():
     arr = list(map(int, input().split()))
     arr.sort()
 
-    res = [0]
+    res = 0
 
-    backtracking(arr, s, 0, n, res)
+    backtracking(s, 0)
 
-    return str(res[0])
+    return str(res)
 
-def backtracking(arr, s, i, n, res):
+def backtracking(s, i):
+    global n, res, arr
     if i == n:
         return
 
     s -= arr[i]
 
     if s == 0:
-        res[0] += 1
+        res += 1
 
-    backtracking(arr, s+arr[i], i+1, n, res)
-    backtracking(arr, s, i+1, n, res)
+    backtracking(s+arr[i], i+1)
+    backtracking(s, i+1)
 
 
 if __name__ == "__main__":
