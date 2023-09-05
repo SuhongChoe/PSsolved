@@ -120,13 +120,11 @@ def function():
     for i, e in enumerate(elec):
         if len(using) == n and not e in using:
             lastest = 0
-            off_elec = -1
             for u_e in using:
                 try:
                     if lastest < elec.index(u_e, i):
                         lastest = elec.index(u_e, i)
                         off_elec = u_e
-                    lastest = max(lastest, elec.index(u_e, i))
                 except:
                     off_elec = u_e
                     break
