@@ -26,15 +26,14 @@ def function():
 
 def backtracking(s, i):
     global n, res, arr
+    
     if i == n:
         return
 
-    s -= arr[i]
-
-    if s == 0:
+    if s - arr[i] == 0:
         res += 1
 
-    backtracking(s+arr[i], i+1)
+    backtracking(s-arr[i], i+1)
     backtracking(s, i+1)
 
 
