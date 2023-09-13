@@ -54,6 +54,44 @@ print = sys.stdout.write
 #
 #     return False
             
+# def function():
+#     # write code down
+
+#     s = input().strip()
+#     p = input().strip()
+
+#     table = kmp_table(p)
+
+#     n, m = len(s), len(p)
+#     res = 0
+
+#     j = 0
+#     for i in range(n):
+#         while j > 0 and s[i]!=p[j]:
+#             j = table[j-1]
+#         if s[i]==p[j]:
+#             if j==m-1:
+#                 res = 1
+#                 break
+#             j += 1
+
+#     return str(res)
+
+# def kmp_table(pattern):
+#     n = len(pattern)
+
+#     table = [0]*n
+
+#     j = 0
+#     for i in range(1, n):
+#         while j > 0 and pattern[i]!=pattern[j]:
+#             j = table[j-1]
+#         if pattern[i]==pattern[j]:
+#             j += 1
+#             table[i] = j
+
+#     return table
+
 def function():
     # write code down
 
@@ -61,27 +99,26 @@ def function():
     p = input().strip()
 
     table = kmp_table(p)
-
-    n, m = len(s), len(p)
     res = 0
 
     j = 0
+    n, m = len(s), len(p)
     for i in range(n):
         while j > 0 and s[i]!=p[j]:
             j = table[j-1]
         if s[i]==p[j]:
-            if j==m-1:
+            j += 1
+            if j==m:
                 res = 1
                 break
-            j += 1
-
+    
     return str(res)
 
 def kmp_table(pattern):
     n = len(pattern)
 
     table = [0]*n
-
+    
     j = 0
     for i in range(1, n):
         while j > 0 and pattern[i]!=pattern[j]:
