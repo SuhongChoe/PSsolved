@@ -3,7 +3,8 @@ def dfs(graph, visited, node):
     for next_node in range(len(graph)):
         if graph[node][next_node] == 1 and not visited[next_node]:
             dfs(graph, visited, next_node)
-    
+
+
 
 def solution(n, computers):
     # 네트워크의 개수를 파악하는 문제임
