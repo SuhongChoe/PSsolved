@@ -13,6 +13,7 @@ print = sys.stdout.write
 #     # output
 #     # 1. 읽을 수 있는 단어 개수의 최대값
 
+
 #     # solution
 #     # backtracking 을 통해 문제를 해결함
 #     # 1. 기존의 단어set에 무조건 배워야하는 단어 'antic'를 빼고 저장
