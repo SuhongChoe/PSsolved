@@ -9,6 +9,7 @@ print=stdout.write
 #
 #     res = []
 #
+#
 #     for _ in range(int(input())):
 #         # 가로, 세로, 배추 개수
 #         n, m, k = map(int, input().split())
