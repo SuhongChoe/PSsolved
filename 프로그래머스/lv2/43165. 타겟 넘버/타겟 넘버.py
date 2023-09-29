@@ -17,11 +17,11 @@ def solution(numbers, target):
     # 각숫자가 + - 일 모든 경우를 적절히 섞어 완전탐색으로 푼다면 2**20 약 100만
     # 시간복잡도 괜찮음
     
-#     res = [0]
+    # res = [0]
     
-#     dfs(numbers, 0, target, res)
+    # dfs(numbers, 0, target, res)
     
-#     return res[0]
+    # return res[0]
     if not numbers and target == 0:
         return 1
     elif not numbers:
