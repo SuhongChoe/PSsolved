@@ -4,7 +4,8 @@ print=stdout.write
 
 def function():
     # write down code
-    # 상근이는 숫자 카드 n개를 가지고 있다.
+    # 상근이는 숫자 카드 n개
+    # 어떻게 할까?
     # 해당 카드가 몇 개 인지 구하는 프로그램
 
     # solution 1
