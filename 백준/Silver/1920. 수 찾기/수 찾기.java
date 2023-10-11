@@ -19,7 +19,7 @@ public class Main {
         st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
 
-        StringBuffer sb = new StringBuffer();
+        StringBuffer sb = new StringBuffer(n*2);
 
         st = new StringTokenizer(br.readLine());
         for(int i=0; i<n; i++){
