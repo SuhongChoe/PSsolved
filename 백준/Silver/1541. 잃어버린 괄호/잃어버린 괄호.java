@@ -7,7 +7,7 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine(), "-");;
 
         int res = 0;
-        int cnt = 0;
+        boolean flag = true;
 
         while (st.hasMoreTokens()){
             int sum = 0;
@@ -16,10 +16,13 @@ public class Main {
 
             while (tmp.hasMoreTokens()) sum += Integer.parseInt(tmp.nextToken());
 
-            if (cnt==0) res += sum;
-            else res -= sum;
-
-            cnt++;
+            if (flag){
+                res += sum;
+                flag = false;
+                continue;
+            }
+            
+            res -= sum;
             
         }
 
