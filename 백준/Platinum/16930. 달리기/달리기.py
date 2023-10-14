@@ -16,6 +16,7 @@ def function():
 
     # output
     # 1. (x1, y1) 에서 (x2, y2)로 이동하는 최소 시간 (단, 이동할 수 없을 땐 -1)
+    
 
     from collections import deque
 
