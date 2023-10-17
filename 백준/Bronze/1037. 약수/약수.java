@@ -9,11 +9,17 @@ public class Main {
         int n = Integer.parseInt(st.nextToken());
 
         st = new StringTokenizer(br.readLine());
-        int arr[] = new int[n];
-        for(int i=0; i<n; i++) arr[i] = Integer.parseInt(st.nextToken());
-        Arrays.sort(arr);
 
-        System.out.print(arr[0] * arr[n-1]);
+        int min = 1000001;
+        int max = 1;
+
+        for(int i=0; i<n; i++) {
+            int tmp = Integer.parseInt(st.nextToken());
+            if (min > tmp) min = tmp;
+            if (max < tmp) max = tmp;
+        }
+
+        System.out.print(min*max);
 
     }
 }
