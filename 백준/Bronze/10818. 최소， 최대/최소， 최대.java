@@ -12,13 +12,13 @@ public class Main {
         int max = -1000001;
 
         st = new StringTokenizer(br.readLine());
-        while (st.hasMoreTokens()){
-            n = Integer.parseInt(st.nextToken());
-            if (min > n) min = n;
-            if (max < n) max = n;
+        for(int i=0; i<n; i++){
+            int num = Integer.parseInt(st.nextToken());
+            if (min > num) min = num;
+            if (max < num) max = num;
         }
 
         System.out.print(min + " " + max);
-        
+
     }
 }
