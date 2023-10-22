@@ -4,25 +4,28 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        PriorityQueue<int []> pq = new PriorityQueue<>((o1, o2)-> {
-            if(o1[0]==o2[0]){
-                return o1[1] - o2[1];
+        PriorityQueue<Integer> pq = new PriorityQueue<>((n1, n2)-> {
+            int a1 = Math.abs(n1);
+            int a2 = Math.abs(n2);
+
+            if (a1==a2){
+                return n1 - n2;
             }
-            return o1[0] - o2[0];
+            return a1 - a2;
         });
 
         int n = Integer.parseInt(br.readLine());
 
         StringBuffer sb = new StringBuffer();
-
+        int num;
         while(n-- > 0){
-            int num = Integer.parseInt(br.readLine());
+            num = Integer.parseInt(br.readLine());
 
             if (num!=0){
-                pq.add(new int[] {Math.abs(num), num});
+                pq.add(num);
             }
             else{
-                num = pq.isEmpty() ? 0 : pq.poll()[1];
+                num = !pq.isEmpty() ? pq.poll() : 0;
                 sb.append(num).append("\n");
             }
         }
