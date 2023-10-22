@@ -1,49 +1,51 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 class Solution {
     static String[][] tickets;
-    static boolean visited[];
-    static String res[];
+    static boolean[] visited;
+    static Deque<String> res = new LinkedList<>();
     
-    public static void dfs(String from, int cnt, String word){
+    public static boolean dfs(String from, int cnt){
+        res.addLast(from);
         if (cnt==tickets.length){
-            StringTokenizer st = new StringTokenizer(word);
-            
-            int i=0;
-            while(st.hasMoreTokens()){
-                res[i++] = st.nextToken();
-            }
-            // for(int i=0; i<cnt; i++){
-            //     res[i] = st.nextToken();
-            // }
+            return true;
         }
-        else{
-            for(int i=0; i<tickets.length;i++){
-                if(!visited[i] && from.equals(tickets[i][0])){
-                    String to = tickets[i][1];
-                    visited[i] = true;
-                    dfs(to, cnt+1, word + " " + to);
-                    visited[i] = false;
+        
+        for(int i=0; i<tickets.length; i++){
+            if (tickets[i][0].equals(from) && !visited[i]){
+                visited[i] = true;
+                if (dfs(tickets[i][1], cnt+1)){
+                    return true;
                 }
+                visited[i] = false;
             }
         }
+        
+        res.pollLast();
+        
+        return false;
     }
     
     public String[] solution(String[][] tickets) {
         this.tickets = tickets;
-        Arrays.sort(this.tickets, (s2, s1) -> {
+        visited = new boolean[tickets.length];
+        
+        Arrays.sort(this.tickets, (s1, s2) -> {
             if (s1[0].equals(s2[0])){
                 return s1[1].compareTo(s2[1]);
             }
             return s1[0].compareTo(s2[0]);
         });
         
-        visited = new boolean[tickets.length];
-        res = new String[tickets.length+1];
+        dfs("ICN", 0);
         
-        dfs("ICN", 0, "ICN");
+        String[] result = new String[tickets.length+1];
         
-        return res;
+        for(int i=0; i<tickets.length+1;i++){
+            result[i] = res.pollFirst();
+        }
+        
+        return result;
     }
 }
