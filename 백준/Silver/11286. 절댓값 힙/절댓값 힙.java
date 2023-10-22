@@ -1,39 +1,32 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        PriorityQueue<int []> pq = new PriorityQueue<>((o1, o2)-> {
+            if(o1[0]==o2[0]){
+                return o1[1] - o2[1];
+            }
+            return o1[0] - o2[0];
+        });
 
-        int n = Integer.parseInt(st.nextToken());
+        int n = Integer.parseInt(br.readLine());
 
         StringBuffer sb = new StringBuffer();
 
-        PriorityQueue<Integer> absheap = new PriorityQueue<>(n, (o1, o2)-> {
-            int a1 = Math.abs(o1);
-            int a2 = Math.abs(o2);
-
-            if (a1==a2) return o1 - o2;
-            return a1 - a2;
-        });
-
-        for(int i=0; i<n; i++){
+        while(n-- > 0){
             int num = Integer.parseInt(br.readLine());
 
             if (num!=0){
-                absheap.add(num);
-            } else {
-                if(!absheap.isEmpty()){
-                    sb.append(absheap.poll());
-                } else{
-                    sb.append("0");
-                }
-                sb.append("\n");
+                pq.add(new int[] {Math.abs(num), num});
+            }
+            else{
+                num = pq.isEmpty() ? 0 : pq.poll()[1];
+                sb.append(num).append("\n");
             }
         }
 
         System.out.print(sb);
-
     }
 }
