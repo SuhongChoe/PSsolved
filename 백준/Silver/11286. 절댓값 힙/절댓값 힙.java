@@ -4,7 +4,10 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        PriorityQueue<Integer> pq = new PriorityQueue<>((n1, n2)-> {
+
+        int n = Integer.parseInt(br.readLine());
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>(n, (n1, n2)-> {
             int a1 = Math.abs(n1);
             int a2 = Math.abs(n2);
 
@@ -13,8 +16,6 @@ public class Main {
             }
             return a1 - a2;
         });
-
-        int n = Integer.parseInt(br.readLine());
 
         StringBuffer sb = new StringBuffer();
         int num;
