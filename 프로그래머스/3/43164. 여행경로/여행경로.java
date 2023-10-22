@@ -6,16 +6,17 @@ class Solution {
     static boolean[] visited;
     static Deque<String> res = new LinkedList<>();
     
-    public static boolean dfs(String from, int cnt){
+    public static boolean dfs(String from){
         res.addLast(from);
-        if (cnt==tickets.length){
+        
+        if (res.size()==tickets.length+1){
             return true;
         }
         
         for(int i=0; i<tickets.length; i++){
             if (tickets[i][0].equals(from) && !visited[i]){
                 visited[i] = true;
-                if (dfs(tickets[i][1], cnt+1)){
+                if (dfs(tickets[i][1])){
                     return true;
                 }
                 visited[i] = false;
@@ -38,7 +39,7 @@ class Solution {
             return s1[0].compareTo(s2[0]);
         });
         
-        dfs("ICN", 0);
+        dfs("ICN");
         
         String[] result = new String[tickets.length+1];
         
