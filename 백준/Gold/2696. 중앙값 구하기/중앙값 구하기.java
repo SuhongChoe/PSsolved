@@ -11,38 +11,31 @@ public class Main {
         StringBuffer sb = new StringBuffer();
 
         while(t-- > 0){
-            PriorityQueue<Integer> right = new PriorityQueue<>((n1,n2)->(n1-n2));
+            PriorityQueue<Integer> right = new PriorityQueue<>();
             PriorityQueue<Integer> left = new PriorityQueue<>((n1,n2)->(n2-n1));
-            PriorityQueue<Integer> tmp = new PriorityQueue<>();
 
             int m = Integer.parseInt(br.readLine());
-            int arr[] = new int[m];
-            int j=0;
-            for(int i=0; i<(int)(m/10)+1; i++){
-                st = new StringTokenizer(br.readLine());
-                while(st.hasMoreTokens()) arr[j++] = Integer.parseInt(st.nextToken());
-            }
-
             sb.append((m-1)/2+1);
-            for(int i=0; i<m; i++){
-                int mid = arr[i];
-                if(!left.isEmpty() && !right.isEmpty()){
-                    tmp.add(left.poll());
-                    tmp.add(mid);
-                    tmp.add(right.poll());
-                    
-                    left.add(tmp.poll());
-                    mid = tmp.poll();
-                    right.add(tmp.poll());
-                }
+            for(int i=0; i<(m/10)+1; i++){
+                st = new StringTokenizer(br.readLine());
+                for(int j=i*10; j<Math.min(m,(i+1)*10); j++) {
+                    int mid = Integer.parseInt(st.nextToken());
 
-                if (i%20==0) sb.append("\n");
+                    if (left.size() == right.size()){
+                        left.add(mid);
+                    } else {
+                        right.add(mid);
+                    }
 
-                if(left.size()==right.size()){
-                    sb.append(mid).append(" ");
-                    left.add(mid);
-                } else {
-                    right.add(mid);
+                    if (j%20==0) sb.append("\n");
+
+                    if (left.size() != right.size()){
+                        if (!right.isEmpty() && left.peek() > right.peek()){
+                            right.add(left.poll());
+                            left.add(right.poll());
+                        }
+                        sb.append(left.peek()).append(" ");
+                    }
                 }
             }
             sb.append("\n");
