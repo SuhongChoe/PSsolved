@@ -7,15 +7,22 @@ public class Main {
     static boolean[] visited;
     static StringBuffer sb = new StringBuffer();
 
-    public static void choiceNumber(int idx, int cnt, String tmp){
-        if (cnt>=6){
-            sb.append(tmp.trim()).append("\n");
+    public static void choiceNumber(int idx, int cnt){
+        if (cnt==6){
+            for(int i=0; i<k; i++){
+                if (visited[i]){
+                    sb.append(selNum[i]).append(" ");
+                }
+            }
+            sb.append("\n");
+
             return;
         }
+
         for(int i=idx; i<k; i++){
             if (!visited[i]) {
                 visited[i] = true;
-                choiceNumber(i + 1, cnt + 1, tmp + " " + selNum[i]);
+                choiceNumber(i + 1, cnt + 1);
                 visited[i] = false;
             }
         }
@@ -34,7 +41,7 @@ public class Main {
             visited = new boolean[k];
             for(int i=0; i<k; i++) selNum[i] = Integer.parseInt(st.nextToken());
 
-            choiceNumber(0, 0, "");
+            choiceNumber(0, 0);
 
             sb.append("\n");
         }
