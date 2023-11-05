@@ -2,54 +2,54 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st;
+
+    static void read() throws IOException{
+        st = new StringTokenizer(br.readLine());
+    }
+    static int nextInt(){
+        return Integer.parseInt(st.nextToken());
+    }
+
     static int n, m;
-    static int in[];
-    static ArrayList<Integer> graph[];
-    static StringBuffer sb;
+    static int[] income;
+    static List<Integer>[] graph;
 
-    public static void topology_sort(){
-        Queue<Integer> q = new LinkedList<>();
-        sb = new StringBuffer(n*2);
+    public static void main(String[] args) throws IOException{
+        read();
+        n = nextInt();
+        m = nextInt();
+        income = new int[n+1];
+        graph = new ArrayList[n+1];
+        for(int i=1; i<=n; i++) graph[i] = new ArrayList<Integer>();
 
-        for(int i=1; i<n+1; i++){
-            if (in[i]==0){
-                q.add(i);
-            }
+        for(int i=0; i<m; i++){
+            read();
+            int a = nextInt();
+            int b = nextInt();
+            graph[a].add(b);
+            income[b]++;
         }
 
+        Deque<Integer> q = new LinkedList<>();
+
+        for(int i=1; i<=n; i++) if(income[i]==0) q.addFirst(i);
+
+        StringBuffer sb = new StringBuffer();
+
         while(!q.isEmpty()){
-            int node = q.poll();
+            int node = q.pollLast();
 
             sb.append(node).append(" ");
 
             for(int next_node : graph[node]){
-                in[next_node]--;
-                if (in[next_node]==0) q.add(next_node);
+                income[next_node]--;
+                if(income[next_node]==0){
+                    q.addFirst(next_node);
+                }
             }
         }
-    }
-    
-    public static void main(String[] args) throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-
-        n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
-        in = new int[n+1];
-        graph = new ArrayList[n+1];
-        for(int i=0; i<n+1; i++){
-            graph[i] = new ArrayList<>();
-        }
-
-        while(m-- > 0){
-            st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());            
-            int b = Integer.parseInt(st.nextToken());
-            graph[a].add(b);
-            in[b]++;
-        }
-
-        topology_sort();
 
         System.out.print(sb);
 
