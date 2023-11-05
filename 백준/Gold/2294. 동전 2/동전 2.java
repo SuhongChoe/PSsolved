@@ -14,16 +14,15 @@ public class Main {
     }
 
     static int n, k;
-    static int[] arr;
-    static long[] dp;
+    static int[] arr, dp;
 
     public static void main(String[] args) throws IOException{
         read();
         n = nextInt();
         k = nextInt();
         arr = new int[n];
-        dp = new long[k+1];
-        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp = new int[k+1];
+        Arrays.fill(dp, 2000000000);
         dp[0] = 0;
 
         for(int i=0; i<n; i++) arr[i] = Integer.parseInt(br.readLine());
@@ -35,6 +34,6 @@ public class Main {
             }
         }
 
-        System.out.print(dp[k]==Integer.MAX_VALUE ? -1 : dp[k]);
+        System.out.print(dp[k]==2000000000 ? -1 : dp[k]);
     }
 }
