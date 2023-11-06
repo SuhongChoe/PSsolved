@@ -1,45 +1,44 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
 
-    static void read() throws IOException {
+    static void read() throws IOException{
         st = new StringTokenizer(br.readLine());
     }
-
     static int nextInt() {
         return Integer.parseInt(st.nextToken());
     }
 
-    static int n, k;
+    static int n, k, res;
     static String[] arr;
     static boolean[] visited = new boolean[26];
-    static int res=0;
 
-    static boolean check(String s){
-        for(int i=0; i<s.length(); i++){
-            if(!visited[s.charAt(i) - 'a']){
+    static boolean canLearn(String tmp){
+        for(int i=0; i<tmp.length(); i++){
+            if(!visited[tmp.charAt(i)-'a']){
                 return false;
             }
         }
         return true;
     }
 
-    static void dfs(int idx, int cNum){
-        if(cNum==0){
-            int cnt = 0;
-            for(String s : arr){
-                if(check(s)) cnt++;
+    static void bfs(int idx, int cnt){
+        if(cnt==k-5){
+            int com_cnt = 0;
+            for(String str : arr){
+                if(canLearn(str)) com_cnt++;
             }
-            res = Math.max(res, cnt);
+
+            res = Math.max(res, com_cnt);
             return;
         }
-        for(int i=idx+1; i<26; i++){
+        for(int i=idx; i<26; i++){
             if(!visited[i]){
                 visited[i] = true;
-                dfs(i,cNum-1);
+                bfs(i+1, cnt+1);
                 visited[i] = false;
             }
         }
@@ -59,15 +58,13 @@ public class Main {
         visited['a'-'a'] = true;
         visited['n'-'a'] = true;
         visited['t'-'a'] = true;
-        visited['i'-'a'] = true;
         visited['c'-'a'] = true;
+        visited['i'-'a'] = true;
 
-        if(k<5){
-            System.out.print(0);
-        } else {
-            dfs(0, k-5);
-            System.out.print(res);
-        }
+        res = 0;
+
+        if(k>=5) bfs(0, 0);
         
+        System.out.print(res);
     }
 }
