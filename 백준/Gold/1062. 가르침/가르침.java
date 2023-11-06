@@ -28,9 +28,7 @@ public class Main {
     static void bfs(int idx, int cnt){
         if(cnt==k-5){
             int com_cnt = 0;
-            for(String str : arr){
-                if(canLearn(str)) com_cnt++;
-            }
+            for(String str : arr) if(canLearn(str)) com_cnt++;
 
             res = Math.max(res, com_cnt);
             return;
