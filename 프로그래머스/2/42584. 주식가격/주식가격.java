@@ -10,6 +10,7 @@ class Solution {
             ps.add(new int[] {i, prices[i]}); // idx, value
         }
         
+        
         int res[] = new int[ps.size()];
         
         for(int i=0;i<ps.size(); i++){
