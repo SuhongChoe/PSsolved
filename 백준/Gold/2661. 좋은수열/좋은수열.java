@@ -2,48 +2,41 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st;
 
     static int n;
+    static String res="";
+    static String[] arr = {"1", "2", "3"};
 
-    static String[] nums = {"1", "2", "3"};
-
-    public static boolean isGood(String num){
-        int mid = num.length()/2;
-
-        for(int i=1;i<=mid; i++) {
-            String right = num.substring(num.length() - i, num.length());
-            String left = num.substring(num.length() - i * 2, num.length() - i);
-
-            if(left.equals(right)) return false;
+    static boolean isGood(String num){
+        for(int i=1; i <= num.length()/2; i++){
+            String str1 = num.substring(num.length()-i, num.length());
+            String str2 = num.substring(num.length()-i*2, num.length()-i);
+            if(str1.equals(str2)){
+                return false;
+            }
         }
         return true;
     }
 
-    static StringBuffer sb = new StringBuffer();
-
-    public static void dfs(String tmp){
-        if(sb.length()>0) return;
-        if(tmp.length()==n){
-            sb.append(tmp);
+    static void dfs(int cnt, String tmp){
+        if(!res.equals("")) return;
+        if(cnt==n){
+            res = tmp;
             return;
         }
-        for(String num : nums){
-            String new_tmp = tmp + num;
-            if(isGood(new_tmp)){
-                dfs(new_tmp);
-            }
+        for(String number : arr){
+            String newTmp = tmp+number;
+            if(isGood(newTmp))
+                dfs(cnt+1, newTmp);
         }
     }
-
-
-    public static void main(String[] args) throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+    public static void main(String[] args) throws IOException {
         n = Integer.parseInt(br.readLine());
 
-        dfs("");
+        dfs(0, "");
 
-        System.out.print(sb);
-
+        System.out.print(res);
     }
 }
