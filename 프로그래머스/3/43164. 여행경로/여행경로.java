@@ -7,6 +7,7 @@ class Solution {
     static Deque<String> res = new LinkedList<>();
     
     public static boolean dfs(String from){
+        
         res.addLast(from);
         
         if (res.size()==tickets.length+1){
