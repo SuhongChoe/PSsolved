@@ -29,6 +29,7 @@ class Solution {
         return false;
     }
     
+    
     public String[] solution(String[][] tickets) {
         this.tickets = tickets;
         visited = new boolean[tickets.length];
