@@ -23,6 +23,7 @@ def function():
     res = 0
     classroom = 0
 
+    
     for k in keys:
         classroom += dic[k]
         res = max(res, classroom)
