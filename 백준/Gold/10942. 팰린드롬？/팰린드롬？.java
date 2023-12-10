@@ -8,6 +8,7 @@ public class Main {
     static void read() throws IOException {
         st = new StringTokenizer(br.readLine());
     }
+    
     static int nextInt() {
         return Integer.parseInt(st.nextToken());
     }
