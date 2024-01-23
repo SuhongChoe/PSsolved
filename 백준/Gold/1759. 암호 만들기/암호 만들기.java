@@ -70,18 +70,34 @@ public class Main {
 	static char[] passwords;
 	static boolean[] visited;
 	
-	static void dfs(int idx, int cnt, String tmp) {
-		if(cnt==L && checkPwd(tmp.toCharArray())) {
-			System.out.println(tmp);
+	static void dfs(int idx, int cnt) {
+		if(cnt==L) {
+			char[] tmp = new char[L];
+			int j=0;
+			for(int i=0; i<C; i++) {
+				if(visited[i]) {
+					tmp[j++] = passwords[i];
+				}
+			}
+			
+			if(checkPwd(tmp)) System.out.println(new String(tmp));
 			return;
 		}
-		for(int i=idx; i<C; i++) {
-			if(!visited[idx]) {
-				visited[idx] = true;
-				dfs(i+1, cnt+1, tmp + passwords[i]);
-				visited[idx] = false;
-			}
-		}
+		
+		if(idx==C) return;
+		
+		visited[idx] = true;
+		dfs(idx+1, cnt+1);
+		visited[idx] = false;
+		dfs(idx+1, cnt);
+		
+//		for(int i=idx; i<C; i++) {
+//			if(!visited[idx]) {
+//				visited[idx] = true;
+//				dfs(i+1, cnt+1);
+//				visited[idx] = false;
+//			}
+//		}
 	}
 	
 	static boolean checkPwd(char[] str) {
@@ -110,6 +126,6 @@ public class Main {
 		visited = new boolean[C];
 		Arrays.fill(visited, false);
 		
-		dfs(0, 0, "");
+		dfs(0, 0);
 	}
 }
